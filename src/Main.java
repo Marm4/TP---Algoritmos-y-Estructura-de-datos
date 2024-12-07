@@ -1,20 +1,18 @@
-import java.util.List;
+import enums.ModoDeJuego;
+import tdas.listaYCola.Lista;
+import tdas.Tateti;
+import tdas.menu.Menu;
 
-//TIP To <b>Run</b> code, press <shortcut actionId="Run"/> or
-// click the <icon src="AllIcons.Actions.Execute"/> icon in the gutter.
 public class Main {
-    public static void main(String[] args) {
+    public static void main(String[] args) throws Exception {
+        Menu menu = new Menu();
+        menu.mostrarMensajedeBienvenida();
 
-        Consola.getInstance().bienvenido();
-        Integer modoJuego = Consola.getInstance().getModoJuego();
-        List<String> nombres = Consola.getInstance().getNombres(modoJuego);
+        ModoDeJuego modoDeJuego = menu.obtenerModoDeJuego();
+        Lista<String> nombresJugadores = menu.obtenerNombresDeJugadores(modoDeJuego);
 
-        try {
-            Tateti tateti = new Tateti(modoJuego, nombres);
-            tateti.jugar();
-        } catch (Exception e) {
-            throw new RuntimeException(e);
-        }
+        Tateti tateti = new Tateti(modoDeJuego, nombresJugadores);
+        tateti.jugar();
 
     }
 }
